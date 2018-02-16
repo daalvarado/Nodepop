@@ -1,22 +1,45 @@
-<!DOCTYPE html>
-<html>
+<% include partials/header %>
 
-<head>
-  <title>
-    <%= title %>
-  </title>
-  <link rel='stylesheet' href='/stylesheets/style.css' />
-</head>
+  <div class="container-fluid">
 
-<body>
-  <h1>
-    <%= title %>
-  </h1>
-  <p>Hi! Welcome to
-    <%= title %>
-  </p>
+    <header class="jumbotron">
+      <h1 class="display-4">Welcome to
+        <%= title %>
+      </h1>
+      <p>These are our classified ads:</p>
+      <p>
+        <a class="btn btn-primary btn-large" href="/new">New Classified Add</a>
+      </p>
+    </header>
 
 
-</body>
+    <div class="row text-center justify-content-center " style="display:flex; flex-wrap: wrap;">
+      <% ads.forEach(function (Ad) { %>
+        <div class="col-md-auto ">
+          <div class="img-thumbnail bg-secondary rounded">
+            <img src="<%= Ad.picture %>" height="300" width="400">
+            <div class="caption  text-light">
+              <h4 class="justify-self-center">
+                <%= Ad.name %>
+              </h4>
+              <p> Sale:
+                <%= Ad.sale %>
+              </p>
+              <p>Price:
+                <%= Ad.price %>
+              </p>
 
-</html>
+              <p>Tags:
+                <%= Ad.tags %>
+              </p>
+            </div>
+          </div>
+        </div>
+        <% }) %>
+
+
+    </div>
+  </div>
+
+
+  <% include partials/footer %>

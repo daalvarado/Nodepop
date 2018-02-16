@@ -11,34 +11,46 @@ const usersDatabase = require('./db/users.json');
 //     console.log('Ads', ads);
 // });
 
-Ad.deleteMany().then((result) => {
-    console.log("Ads database erased");
-}).catch((e) => console.log("Error deleting Ads database"));
+// Ad.deleteMany().then((result) => {
+//     console.log("Ads database erased");
+// }).catch((e) => console.log("Error deleting Ads database"));
 
-User.deleteMany().then((result) => {
-    console.log("Users database erased");
-}).catch((e) => console.log("Error deleting Users database"))
+// User.deleteMany().then((result) => {
+//     console.log("Users database erased");
+// }).catch((e) => console.log("Error deleting Users database"))
 
-Ad.insertMany(adsDatabase).then((result) => {
-    console.log("Ads database updated");
-}).catch((e)=> {
-    console.log("Error updating ads database"); console.log(e)}
-);
+// Ad.insertMany(adsDatabase).then((result) => {
+//     console.log("Ads database updated");
+// }).catch((e)=> {
+//     console.log("Error updating ads database"); console.log(e)}
+// );
 
-User.insertMany(usersDatabase).then((result) => {
-    console.log("Users databse updated");
-}).catch((e) => console.log("Error updating users database"))
+// User.insertMany(usersDatabase).then((result) => {
+//     console.log("Users databse updated");
+// }).catch((e) => console.log("Error updating users database"))
 
 // process.exit()
 
-// Ad.deleteMany()
-//     .then((result) => {
-//         console.log("Ads database erased");
-//     })
-//     .then(Ad.insertMany(adsDatabase))
-//     .then((result) => {
-//         console.log("Ads database updated");
-//     })
+Ad.deleteMany()
+    .then((result) => {
+        console.log("Ads database erased");
+    })
+    .then(Ad.insertMany(adsDatabase))
+    .then((result) => {
+        console.log("Ads database updated");
+    })
+    .catch((e) => console.log("Error deleting and updating Ads database"));
+
+User.deleteMany()
+    .then((result) => {
+        console.log("Users database erased");
+    })
+    .then(User.insertMany(usersDatabase))
+    .then((result) => {
+        console.log("Users database updated");
+        process.exit(0)
+    })
+    .catch((e) => console.log("Error deleting and updating Users database"));
 //     .then(User.deleteMany())
 //     .then((result) => {
 //         console.log("Users database erased");

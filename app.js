@@ -6,7 +6,8 @@ var bodyParser = require('body-parser');
 // connect to the database
 require('./mongoose/connect');
 // load the model
-require('./mongoose/models/Ad');
+const {Ad} = require('./mongoose/models/Ad');
+require('./mongoose/models/User');
 
 var app = express();
 
@@ -14,7 +15,7 @@ var app = express();
 app.set('views', path.join(__dirname, 'views'));
 app.set('view engine', 'ejs');
 
-app.locals.title="Nozepop";
+app.locals.title="Nodepop";
 
 app.use(logger('dev'));
 app.use(bodyParser.json());
@@ -24,7 +25,21 @@ app.use(express.static(path.join(__dirname, 'public')));
 //webApp middlewares
 app.use('/', require('./routes/index'));
 app.use('/users', require('./routes/users'));
-app.use('/apiv1/ads', require('./routes/apiv1/ads'));
+app.use('/apiv1', require('./routes/apiv1/ads'));
+app.get('/new', function(req, res){
+  res.render('new.ejs');
+})
+app.post('/', function(req, res){
+  var newAd = new Ad(req.body);
+  newAd.save()
+    .then(item => {
+      res.redirect('/') 
+    })
+    .catch((e) => {
+      res.status(400).send("unable to save to database");
+    })
+    
+});
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {
