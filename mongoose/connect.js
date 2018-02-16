@@ -4,12 +4,14 @@ const mongoose = require('mongoose');
 const conn = mongoose.connection;
 
 conn.on('error', err => {
-  console.log('Error de conexión', err);
+  console.log('Connection error:', err);
   process.exit(1);
 });
 
 conn.once('open', () => {
-  console.log('Conectado a MongoDB en', mongoose.connection.name);
+  console.log('Connected to Mongoose on', mongoose.connection.name);
 });
 
 mongoose.connect('mongodb://localhost/nodepop');
+
+module.exports = {mongoose};
