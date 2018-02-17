@@ -8,10 +8,10 @@ const adSchema = new mongoose.Schema({
     sale: { type: Boolean, default: true, required: true},
     price: { type: Number, min: 0.01, required: true},
     picture: { type: String},
-    tags: {type: String}
+    tags: {type: String, enum:['motor', 'lifestyle', 'work', 'mobile']}
 });
 
-adSchema.statics.listar = function (filtro, skip, limit, sort, fields, callback) {
+adSchema.statics.list = function (filter, skip, limit, sort, fields, callback) {
     const query = Ad.find(filter);
     query.skip(skip);
     query.limit(limit);
