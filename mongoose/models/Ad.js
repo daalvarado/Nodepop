@@ -8,7 +8,7 @@ const adSchema = new mongoose.Schema({
     sale: { type: Boolean, default: true, required: true},
     price: { type: Number, min: 0.01, required: true},
     picture: { type: String},
-    tags: {type: String, enum:['motor', 'lifestyle', 'work', 'mobile']}
+    tags: {type: String}
 });
 
 adSchema.statics.list = function (filter, skip, limit, sort, fields, callback) {
