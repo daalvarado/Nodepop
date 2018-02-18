@@ -38,5 +38,4 @@ filters:
     - skip: number of page to view
     - fields: show only specific field in ad view
 
-API:
-    - Post data must be submitted in x-www-form-urlencoded format (separated by commas, in lowercase) -> validator assumes tags data is string and converts it to array, if posted in raw-json format this might result in error.
+
