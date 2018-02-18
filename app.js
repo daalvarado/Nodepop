@@ -32,8 +32,7 @@ app.get('/new', function(req, res){
 app.post('/', function(req, res){
   req.body.tags = req.body.tags.split(',');
   for (var i=0; i<req.body.tags.length; i++) {
-    req.body.tags[i]=req.body.tags[i].trim();
-    console.log(req.body.tags[i]);
+    req.body.tags[i]=req.body.tags[i].trim()
   }
   var newAd = new Ad(req.body);
   newAd.save()

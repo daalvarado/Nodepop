@@ -111,14 +111,3 @@ router.put('/:id', async (req, res, next) => {
 
 module.exports = router;
 
-
-// router.get('/', async (req, res, next) => {
-//     try {
-
-//         const docs = await Ad.find().exec();
-//         res.json({ success: true, result: docs });
-//     } catch (err) {
-//         next(err);
-//         return;
-//     }
-// });

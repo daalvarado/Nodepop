@@ -7,15 +7,6 @@ const { User } = require('../mongoose/models/User');
 // load validation library
 const {query, validationResult} = require('express-validator/check');
 
-/* GET home page. */
-// router.get('/', function(req, res, next) {
-//   Ad.find({}, function (err, data) {
-//     res.render('index', {
-//       ads: data
-//     })
-//   });
-// })
-
 router.get('/', async (req, res, next) => {
   try {
     const name = req.query.name;
