@@ -41,12 +41,10 @@ router.get('/', async (req, res, next) => {
             if (/^[0-9]\d{0,9}(\.\d{1,2})?$/.test(priceRaw)){
                 filter.price=priceRaw
             }
-            else if (/^-/.test(priceRaw)){
-                // const price1 = priceRaw.substring(1);
-                // const price = {$lte: price1};
+            else if (/^-[0-9]\d{0,9}(\.\d{1,2})?$/.test(priceRaw)){
                 filter.price = { $lte: priceRaw.substring(1) }
             }
-            else if (/-$/.test(priceRaw)){
+            else if (/^[0-9]\d{0,9}(\.\d{1,2})?-$/.test(priceRaw)){
                 filter.price = { $gte: priceRaw.substring(0, priceRaw.length -1) }
             }
             else if (/^[0-9]\d{0,9}(\.\d{1,2})?-\d{0,9}(\.\d{1,2})?$/.test(priceRaw)){
@@ -65,7 +63,11 @@ router.get('/', async (req, res, next) => {
 });
 
 router.post('/', (req, res, next) => {
-    console.log(req.body);
+    req.body.tags = req.body.tags.split(',');
+    for (var i = 0; i < req.body.tags.length; i++) {
+        req.body.tags[i] = req.body.tags[i].trim();
+        console.log(req.body.tags[i]);
+    }
     const data = req.body;
     const ad = new Ad(data);
     ad.save((err, savedAd) => {

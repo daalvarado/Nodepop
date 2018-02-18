@@ -30,13 +30,18 @@ app.get('/new', function(req, res){
   res.render('new.ejs');
 })
 app.post('/', function(req, res){
+  req.body.tags = req.body.tags.split(',');
+  for (var i=0; i<req.body.tags.length; i++) {
+    req.body.tags[i]=req.body.tags[i].trim();
+    console.log(req.body.tags[i]);
+  }
   var newAd = new Ad(req.body);
   newAd.save()
     .then(item => {
       res.redirect('/') 
     })
     .catch((e) => {
-      res.status(400).send("unable to save to database");
+      res.status(400).send(`Unable to save to database: ${e}`);
     })
     
 });
