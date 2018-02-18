@@ -63,10 +63,12 @@ router.get('/', async (req, res, next) => {
 });
 
 router.post('/', (req, res, next) => {
+    if (req.body.tags.length > 4) {
     req.body.tags = req.body.tags.split(',');
     for (var i = 0; i < req.body.tags.length; i++) {
         req.body.tags[i] = req.body.tags[i].trim();
         console.log(req.body.tags[i]);
+        }
     }
     const data = req.body;
     const ad = new Ad(data);
