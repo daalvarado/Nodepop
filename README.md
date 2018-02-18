@@ -5,7 +5,7 @@ Diego Alvarado
 
 
 1. start mongoose server on port 27027
-2. load node modules: npm init
+2. load node modules: npm install
 3. initialize database: npm run dbinit
 4. initialize node server: npm run dev
 
